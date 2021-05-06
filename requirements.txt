@@ -1,10 +1,4 @@
-import ee
-import geemap
-from geemap import *
-import json
-from geemap import geojson_to_ee, ee_to_geojson
-from ipyleaflet import GeoJSON
-import os
-import sklearn
-import numpy
-import scipy
+geemap
+ipyleaflet 
+numpy
+scipy
