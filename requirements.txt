@@ -1,4 +1,0 @@
-geemap
-ipyleaflet 
-numpy
-scipy
