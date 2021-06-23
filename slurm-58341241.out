@@ -1,0 +1,2 @@
+cpu-bind=MASK - host636, task  0  0 [18811]: mask 0x1000000 set
+slurmstepd: error: Detected 1 oom-kill event(s) in step 58341241.batch cgroup. Some of your processes may have been killed by the cgroup out-of-memory handler.
