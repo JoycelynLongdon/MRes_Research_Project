@@ -103,67 +103,16 @@ for train_index, test_index in skf.split(X, y):
     y_train, y_test = y[train_index], y[test_index]
 
 
-print(X_train.shape)
 
-print(X_test.shape)
-
-print(y_train.shape)
-
-print(y_test.shape)
 
 
 # Initialize our model with 500 trees
 rf = RandomForestClassifier(n_estimators=500, oob_score=True)
 
-# Fit our model to training data
-train = rf.fit(X_train, y_train)
-
-
-### TBASELINE RAINING PERFORMANCE
-
-print('Our OOB prediction of our baseline model accuracy is: {oob}%'.format(oob=rf.oob_score_ * 100))
-
-# Setup a dataframe -- just like R
-df = pd.DataFrame()
-df['truth'] = y
-df['predict'] = rf.predict(X)
-
-# Cross-tabulate predictions
-print(pd.crosstab(df['truth'], df['predict'], margins=True))
-
-
-### BAESLINE VALIDATION PERFORMANCE
-
-val = rf.predict(X_test)
-
-target_names = ['Cropland', 'Mosaic Cropland', 'Mosaic Vegetation', 'Forest',
-                         'Shrubland', 'Grassland', 'Urban', 'Water']
-
-print(classification_report(y_test, val, target_names=target_names))
-
-
-disp = metrics.plot_confusion_matrix(rf, X_test, y_test)
-disp.figure_.suptitle("Confusion Matrix")
-print(f"Confusion matrix:\n{disp.confusion_matrix}")
-
-#plt.show()
-
-
-### BAND IMPORTANCE
-
-bands = [1, 2, 3, 4, 5, 6,7,8,9,10]
-
-for b, imp in zip(bands, rf.feature_importances_):
-    print('Band {b} importance: {imp}'.format(b=b, imp=imp))
 
 
 
-#current parameters in use
-# Look at parameters used by our current forest
-print('Parameters currently in use:\n')
-pprint(rf.get_params())
-
-
+'''
 ### HYPERPARAMETER TESTING WITH GRID SEARCH
 #Methood 1: Code adapted from "Dealing with multiclass data" -
 # https://towardsdatascience.com/dealing-with-multiclass-data-78a1a27c5dcc
@@ -196,7 +145,7 @@ def hyper_param_rf_predict(X_train, y_train, X_test, y_test):
 
 
 hyper_param_rf_predict(X_train, y_train, X_test, y_test)
-
+'''
 
 ### HYPERPARAMETER TESTING WITH RANDOM SEARCH
 
@@ -205,16 +154,16 @@ hyper_param_rf_predict(X_train, y_train, X_test, y_test)
 
 ### Create the parameter grid
 # Number of trees in random forest
-n_estimators = [int(x) for x in np.linspace(start = 200, stop = 500, num = 4)]
+n_estimators = [int(x) for x in np.linspace(start = 200, stop = 2000, num = 5)]
 # Number of features to consider at every split
 max_features = ['auto', 'sqrt']
 # Maximum number of levels in tree
-max_depth = [int(x) for x in np.linspace(10, 50, num = 11)]
+max_depth = [int(x) for x in np.linspace(10, 100, num = 11)]
 max_depth.append(None)
 # Minimum number of samples required to split a node
-min_samples_split = [2, 5]
+min_samples_split = [2, 5,10]
 # Minimum number of samples required at each leaf node
-min_samples_leaf = [1, 2]
+min_samples_leaf = [1, 2, 4]
 # Method of selecting samples for training each tree
 bootstrap = [True]
 # Create the random grid
@@ -242,6 +191,7 @@ rf_random.fit(X_train, y_train)
 
 ### Identify the best parameters
 rf_random.best_params_
+print(rf_random.best_params_)
 
 
 ### Evaluate the performance of the grid search model to the baseline model

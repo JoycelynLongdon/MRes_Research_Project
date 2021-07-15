@@ -12,4 +12,4 @@
 
 conda activate mres_proj
 
-srun python /gws/nopw/j04/ai4er/users/jl2182/MRes_Research_Project/src_experiments/landcover_classification/rf_landcover_classification.py
+srun python /gws/nopw/j04/ai4er/users/jl2182/MRes_Research_Project/src_experiments/landcover_classification/rf_landcover_classification_hyp_param_only.py
