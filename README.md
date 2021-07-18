@@ -38,9 +38,9 @@ pip install -r requirements/requirements.txt
 │   │
 │   ├── preprocessing  <- Scripts to process raw satellite imagery from GEE and for further processing in Python
 |   |
-│   ├── models         <- Model code for RF and SVM
+│   ├── landcover_classification         <- Model code for RF and SVM
 │   │
-│   └── analysis       <- Scripts for data post-processing to retrieve statistics and change maps
+│   └── change_detection       <- Scripts for data post-processing to retrieve statistics and change maps
 │
 └── setup.cfg          <- setup configuration file for linting rules
 ```
